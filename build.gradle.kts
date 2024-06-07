@@ -1,18 +1,15 @@
 plugins {
     id("java")
-    id("org.jetbrains.intellij") version "1.14.1"
+    id("org.jetbrains.intellij") version "1.17.3"
+    id("org.jetbrains.kotlin.jvm") version "1.9.21"
 }
 
 group = "com.espressif.idf"
-version = "0.1-SNAPSHOT"
+version = "0.2-SNAPSHOT"
 
 repositories {
     mavenCentral()
     maven("https://www.jetbrains.com/intellij-repository/snapshots")
-}
-
-dependencies{
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.4.21-2")
 }
 
 // Configure Gradle IntelliJ Plugin
@@ -32,8 +29,8 @@ tasks {
     }
 
     patchPluginXml {
-        sinceBuild.set("222")
-        untilBuild.set("231.*")
+        sinceBuild.set("231")
+        untilBuild.set("241.*")
     }
 
     signPlugin {
@@ -44,5 +41,9 @@ tasks {
 
     publishPlugin {
         token.set(System.getenv("PUBLISH_TOKEN"))
+    }
+
+    runPluginVerifier {
+        ideVersions.set(listOf("242.14146.22","241.14494.229","233.11799.37","232.8660.49","231.8109.174"))
     }
 }
